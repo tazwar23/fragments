@@ -1,7 +1,8 @@
 {
   "name": "fragmnets",
-  "version": "1.0.0",
-  "description": "CPP lab 1",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Fragments back-end API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,11 +11,13 @@
     "type": "git",
     "url": "git+https://github.com/tazwar23/fragmnets.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Ahmed Tazwar",
+  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/tazwar23/fragmnets/issues"
   },
-  "homepage": "https://github.com/tazwar23/fragmnets#readme"
+  "homepage": "https://github.com/tazwar23/fragmnets#readme",
+  "devDependencies": {
+    "prettier": "2.8.8"
+  }
 }
