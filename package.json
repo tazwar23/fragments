@@ -1,5 +1,5 @@
 {
-  "name": "fragmnets",
+  "name": "fragments",
   "private": true,
   "version": "0.0.1",
   "description": "Fragments back-end API",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tazwar23/fragmnets.git"
+    "url": "git+https://github.com/tazwar23/fragments.git"
   },
   "author": "Ahmed Tazwar",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/tazwar23/fragmnets/issues"
+    "url": "https://github.com/tazwar23/fragments/issues"
   },
-  "homepage": "https://github.com/tazwar23/fragmnets#readme",
+  "homepage": "https://github.com/tazwar23/fragments#readme",
   "devDependencies": {
     "eslint": "^8.40.0",
     "nodemon": "^2.0.22",
