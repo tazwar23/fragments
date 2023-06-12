@@ -10,7 +10,7 @@ const authenticate = require('./auth');
 // version and author from our package.json file
 //const { version, author } = require('../package.json');
 
-const { createErrorResponse, createSuccessResponse } = require('./response');
+const { createErrorResponse } = require('./response');
 
 const logger = require('./logger');
 const pino = require('pino-http')({
@@ -66,7 +66,7 @@ app.use((err, req, res, next) => {
   if (status > 499) {
     logger.error({ err }, `Error processing request`);
   }
-  resData = {
+  var resData = {
     error: {
       message,
       code: status,

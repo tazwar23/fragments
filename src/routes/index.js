@@ -8,7 +8,7 @@ const { version, author } = require('../../package.json');
 // Our authentication middleware
 const { authenticate } = require('../auth');
 
-const { createErrorResponse, createSuccessResponse } = require('../response');
+const { createSuccessResponse } = require('../response');
 
 // Create a router that we can use to mount our API
 const router = express.Router();
@@ -26,7 +26,7 @@ router.use(`/v1`, authenticate(), require('./api'));
 router.get('/', (req, res) => {
   // Client's shouldn't cache this response (always request it fresh)
   res.setHeader('Cache-Control', 'no-cache');
-  resData = { author, githubUrl: 'https://github.com/tazwar23/fragments', version };
+  var resData = { author, githubUrl: 'https://github.com/tazwar23/fragments', version };
   // Send a 200 'OK' response
   res.status(200).json(createSuccessResponse(resData));
 });
