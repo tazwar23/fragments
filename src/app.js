@@ -10,6 +10,8 @@ const authenticate = require('./auth');
 // version and author from our package.json file
 //const { version, author } = require('../package.json');
 
+const { createErrorResponse, createSuccessResponse } = require('./response');
+
 const logger = require('./logger');
 const pino = require('pino-http')({
   // Use our default logger instance, which is already configured
@@ -64,14 +66,13 @@ app.use((err, req, res, next) => {
   if (status > 499) {
     logger.error({ err }, `Error processing request`);
   }
-
-  res.status(status).json({
-    status: 'error',
+  resData = {
     error: {
       message,
       code: status,
     },
-  });
+  };
+  res.status(status).json(createErrorResponse(resData));
 });
 
 // Export our `app` so we can access it in server.js
