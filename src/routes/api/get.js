@@ -3,10 +3,14 @@
 /**
  * Get a list of fragments for the current user
  */
+const frag = require('../../model/fragment');
 
 const { createSuccessResponse } = require('../../response');
 module.exports = (req, res) => {
   // TODO: this is just a placeholder to get something working...
-  var resData = { fragments: [] };
-  res.status(200).json(createSuccessResponse(resData));
+
+  frag.Fragment.byUser(req.user).then((data) => {
+    var resData = { fragments: data };
+    res.status(200).json(createSuccessResponse(resData));
+  });
 };
