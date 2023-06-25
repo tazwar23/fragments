@@ -29,6 +29,8 @@ const jwtVerifier = CognitoJwtVerifier.create({
 // verify our Cognito JWTs, see https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets
 // You can try this yourself using:
 // curl https://cognito-idp.us-east-1.amazonaws.com/<user-pool-id>/.well-known/jwks.json
+const authorize = require('./auth-middleware');
+
 jwtVerifier
   .hydrate()
   .then(() => {
@@ -55,4 +57,4 @@ module.exports.strategy = () =>
     }
   });
 
-module.exports.authenticate = () => passport.authenticate('bearer', { session: false });
+module.exports.authenticate = () => authorize('bearer');
