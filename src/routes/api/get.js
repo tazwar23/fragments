@@ -21,14 +21,19 @@ module.exports.get = (req, res) => {
 };
 
 module.exports.getOne = (req, res) => {
-  try {
-    var fragObj = new frag.Fragment({ id: req.params.id, ownerId: req.user, type: 'text/plain' });
-    fragObj.getData().then((data) => {
-      const buffObject = Buffer.from(data);
-      res.setHeader('Content-Type', 'text/plain');
-      res.status(200).send(buffObject.toString());
+  var fragObj = new frag.Fragment({ id: req.params.id, ownerId: req.user, type: 'text/plain' });
+  fragObj
+    .getData()
+    .then((data) => {
+      if (data) {
+        const buffObject = Buffer.from(data);
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(200).send(buffObject.toString());
+      } else {
+        throw new Error('Object not found');
+      }
+    })
+    .catch((error) => {
+      res.status(404).json(createErrorResponse(404, error.message));
     });
-  } catch (msg) {
-    res.status(404).json(createErrorResponse(404, msg.message));
-  }
 };
