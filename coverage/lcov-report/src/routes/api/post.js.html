@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.27% </span>
+                <span class="strong">23.07% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/11</span>
+                <span class='fraction'>3/13</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.27% </span>
+                <span class="strong">23.07% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/11</span>
+                <span class='fraction'>3/13</span>
             </div>
         
             
@@ -85,7 +85,11 @@
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -93,19 +97,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const frag = require('../../model/fragment');
 const { createSuccessResponse } = require('../../response');
@@ -114,20 +122,24 @@ module.exports = <span class="fstat-no" title="function not covered" >as</span>y
   // TODO: Implement the logic for creating a fragment based on the request body
 &nbsp;
   // // Assuming the request body contains necessary data for creating a fragment
-  const fragmentData = <span class="cstat-no" title="statement not covered" >req.body;</span>
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const fragmentData = <span class="cstat-no" title="statement not covered" >req.body;</span>
 &nbsp;
-  var fragObj = <span class="cstat-no" title="statement not covered" >new frag.Fragment({ ownerId: req.user, type: req.headers['content-type'] });</span>
+    var fragObj = <span class="cstat-no" title="statement not covered" >new frag.Fragment({ ownerId: req.user, type: req.headers['content-type'] });</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  fragObj.save();</span>
-<span class="cstat-no" title="statement not covered" >  await fragObj.setData(fragmentData);</span>
+<span class="cstat-no" title="statement not covered" >    fragObj.save();</span>
+<span class="cstat-no" title="statement not covered" >    await fragObj.setData(fragmentData);</span>
 &nbsp;
-  const fragmentURL = <span class="cstat-no" title="statement not covered" >`http://${req.headers.host}/v1/fragments/${fragObj.id}`;</span>
+    const fragmentURL = <span class="cstat-no" title="statement not covered" >`http://${req.headers.host}/v1/fragments/${fragObj.id}`;</span>
 &nbsp;
-  // Set the Location header with the fragment URL
-<span class="cstat-no" title="statement not covered" >  res.setHeader('Location', fragmentURL);</span>
-  var fragment = <span class="cstat-no" title="statement not covered" >{ fragment: fragObj };</span>
+    // Set the Location header with the fragment URL
+<span class="cstat-no" title="statement not covered" >    res.setHeader('Location', fragmentURL);</span>
+    var fragment = <span class="cstat-no" title="statement not covered" >{ fragment: fragObj };</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  res.status(201).json(createSuccessResponse(fragment));</span>
+<span class="cstat-no" title="statement not covered" >    res.status(201).json(createSuccessResponse(fragment));</span>
+  } catch (msg) {
+<span class="cstat-no" title="statement not covered" >    res.status(404).json(createErrorResponse(404, msg));</span>
+  }
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -136,7 +148,7 @@ module.exports = <span class="fstat-no" title="function not covered" >as</span>y
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-25T22:56:58.172Z
+                at 2023-06-25T23:10:12.359Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

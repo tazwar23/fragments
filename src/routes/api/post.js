@@ -1,5 +1,5 @@
 const frag = require('../../model/fragment');
-const { createSuccessResponse } = require('../../response');
+const { createSuccessResponse, createErrorResponse } = require('../../response');
 
 module.exports = async (req, res) => {
   // TODO: Implement the logic for creating a fragment based on the request body
@@ -21,6 +21,6 @@ module.exports = async (req, res) => {
 
     res.status(201).json(createSuccessResponse(fragment));
   } catch (msg) {
-    res.status(404).json(createErrorResponse(404, msg));
+    res.status(404).json(createErrorResponse(404, msg.message));
   }
 };

@@ -16,7 +16,7 @@ module.exports.get = (req, res) => {
       res.status(200).json(createSuccessResponse(resData));
     });
   } catch (msg) {
-    res.status(400).json(createErrorResponse(msg));
+    res.status(400).json(createErrorResponse(msg.message));
   }
 };
 
@@ -29,6 +29,6 @@ module.exports.getOne = (req, res) => {
       res.status(200).send(buffObject.toString());
     });
   } catch (msg) {
-    res.status(404).json(createErrorResponse(404, msg));
+    res.status(404).json(createErrorResponse(404, msg.message));
   }
 };

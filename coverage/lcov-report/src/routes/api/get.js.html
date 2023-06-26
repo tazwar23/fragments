@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.53% </span>
+                <span class="strong">52.94% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/13</span>
+                <span class='fraction'>9/17</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.53% </span>
+                <span class="strong">52.94% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/13</span>
+                <span class='fraction'>9/17</span>
             </div>
         
             
@@ -89,7 +89,15 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -100,10 +108,14 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -112,6 +124,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -122,24 +138,32 @@
  */
 const frag = require('../../model/fragment');
 &nbsp;
-const { createSuccessResponse } = require('../../response');
+const { createSuccessResponse, createErrorResponse } = require('../../response');
 module.exports.get = (req, res) =&gt; {
   // TODO: this is just a placeholder to get something working...
-  var expand = req.query.expand == 1 ? <span class="branch-0 cbranch-no" title="branch not covered" >true </span>: false;
+  try {
+    var expand = req.query.expand == 1 ? <span class="branch-0 cbranch-no" title="branch not covered" >true </span>: false;
 &nbsp;
-  frag.Fragment.byUser(req.user, expand).then((data) =&gt; {
-    var resData = { fragments: data };
-    res.status(200).json(createSuccessResponse(resData));
-  });
+    frag.Fragment.byUser(req.user, expand).then((data) =&gt; {
+      var resData = { fragments: data };
+      res.status(200).json(createSuccessResponse(resData));
+    });
+  } catch (msg) {
+<span class="cstat-no" title="statement not covered" >    res.status(400).json(createErrorResponse(msg));</span>
+  }
 };
 &nbsp;
 module.exports.getOne = <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-  var fragObj = <span class="cstat-no" title="statement not covered" >new frag.Fragment({ id: req.params.id, ownerId: req.user, type: 'text/plain' });</span>
-<span class="cstat-no" title="statement not covered" >  fragObj.getData().then(<span class="fstat-no" title="function not covered" >(d</span>ata) =&gt; {</span>
-    const buffObject = <span class="cstat-no" title="statement not covered" >Buffer.from(data);</span>
-<span class="cstat-no" title="statement not covered" >    res.setHeader('Content-Type', 'text/plain');</span>
-<span class="cstat-no" title="statement not covered" >    res.status(200).send(buffObject.toString());</span>
-  });
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    var fragObj = <span class="cstat-no" title="statement not covered" >new frag.Fragment({ id: req.params.id, ownerId: req.user, type: 'text/plain' });</span>
+<span class="cstat-no" title="statement not covered" >    fragObj.getData().then(<span class="fstat-no" title="function not covered" >(d</span>ata) =&gt; {</span>
+      const buffObject = <span class="cstat-no" title="statement not covered" >Buffer.from(data);</span>
+<span class="cstat-no" title="statement not covered" >      res.setHeader('Content-Type', 'text/plain');</span>
+<span class="cstat-no" title="statement not covered" >      res.status(200).send(buffObject.toString());</span>
+    });
+  } catch (msg) {
+<span class="cstat-no" title="statement not covered" >    res.status(404).json(createErrorResponse(404, msg));</span>
+  }
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -148,7 +172,7 @@ module.exports.getOne = <span class="fstat-no" title="function not covered" >(r<
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-25T22:56:58.172Z
+                at 2023-06-25T23:10:12.359Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

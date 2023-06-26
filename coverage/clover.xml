@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1687733818221" clover="3.2.0">
-  <project timestamp="1687733818221" name="All files">
-    <metrics statements="204" coveredstatements="176" conditionals="83" coveredconditionals="66" methods="42" coveredmethods="37" elements="329" coveredelements="279" complexity="0" loc="204" ncloc="204" packages="7" files="15" classes="15"/>
+<coverage generated="1687734612407" clover="3.2.0">
+  <project timestamp="1687734612408" name="All files">
+    <metrics statements="210" coveredstatements="177" conditionals="83" coveredconditionals="66" methods="42" coveredmethods="37" elements="335" coveredelements="280" complexity="0" loc="210" ncloc="210" packages="7" files="15" classes="15"/>
     <package name="src">
       <metrics statements="38" coveredstatements="31" conditionals="10" coveredconditionals="2" methods="5" coveredmethods="4"/>
       <file name="app.js" path="E:\Seneca Courses\Semester 6\CCP\fragmnets\src\app.js">
@@ -224,22 +224,26 @@
       </file>
     </package>
     <package name="src.routes.api">
-      <metrics statements="37" coveredstatements="22" conditionals="2" coveredconditionals="1" methods="7" coveredmethods="3"/>
+      <metrics statements="43" coveredstatements="23" conditionals="2" coveredconditionals="1" methods="7" coveredmethods="3"/>
       <file name="get.js" path="E:\Seneca Courses\Semester 6\CCP\fragmnets\src\routes\api\get.js">
-        <metrics statements="13" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="2"/>
+        <metrics statements="17" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="2"/>
         <line num="6" count="3" type="stmt"/>
         <line num="8" count="3" type="stmt"/>
         <line num="9" count="3" type="stmt"/>
-        <line num="11" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="13" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
       </file>
       <file name="index.js" path="E:\Seneca Courses\Semester 6\CCP\fragmnets\src\routes\api\index.js">
         <metrics statements="13" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
@@ -258,18 +262,20 @@
         <line num="35" count="3" type="stmt"/>
       </file>
       <file name="post.js" path="E:\Seneca Courses\Semester 6\CCP\fragmnets\src\routes\api\post.js">
-        <metrics statements="11" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="13" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
       </file>
     </package>
   </project>
