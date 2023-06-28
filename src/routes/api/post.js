@@ -1,9 +1,8 @@
 const frag = require('../../model/fragment');
 const { createSuccessResponse, createErrorResponse } = require('../../response');
+const logger = require('../../logger');
 
 module.exports = async (req, res) => {
-  // TODO: Implement the logic for creating a fragment based on the request body
-
   // // Assuming the request body contains necessary data for creating a fragment
   try {
     const fragmentData = req.body;
@@ -18,7 +17,7 @@ module.exports = async (req, res) => {
     // Set the Location header with the fragment URL
     res.setHeader('Location', fragmentURL);
     var fragment = { fragment: fragObj };
-
+    logger.debug({ fragment }, 'Fragment created with post route');
     res.status(201).json(createSuccessResponse(fragment));
   } catch (msg) {
     res.status(404).json(createErrorResponse(404, msg.message));
