@@ -28,7 +28,7 @@ class Fragment {
     if (size < 0) {
       throw new Error('size cannot be a negative number');
     }
-    if (type !== 'text/plain' && type !== 'text/plain; charset=utf-8') {
+    if (isSupportedType(type)) {
       throw new Error('Type not supported');
     }
     this.id = id ? id : randomUUID();
@@ -46,7 +46,7 @@ class Fragment {
    * @returns Promise<Array<Fragment>>
    */
   static async byUser(ownerId, expand = false) {
-    return await listFragments(ownerId, expand);
+    return listFragments(ownerId, expand);
   }
 
   /**
