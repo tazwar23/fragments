@@ -20,6 +20,6 @@ module.exports = async (req, res) => {
     logger.debug({ fragment }, 'Fragment created with post route');
     res.status(201).json(createSuccessResponse(fragment));
   } catch (msg) {
-    res.status(404).json(createErrorResponse(404, msg.message));
+    res.status(500).json(createErrorResponse(404, msg.message));
   }
 };
