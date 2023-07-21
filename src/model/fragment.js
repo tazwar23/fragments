@@ -28,7 +28,7 @@ class Fragment {
     if (size < 0) {
       throw new Error('size cannot be a negative number');
     }
-    if (this.isSupportedType(type)) {
+    if (!Fragment.isSupportedType(type)) {
       throw new Error('Type not supported');
     }
     this.id = id ? id : randomUUID();
