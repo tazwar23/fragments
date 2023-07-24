@@ -1,9 +1,11 @@
-# Use node version 18.13.0
-FROM node:18.13.0
+# Use node version 18.13.0 with it's digest to install the dependencies
+FROM node:18.13.0-bullseye@sha256:d871edd5b68105ebcbfcde3fe8c79d24cbdbb30430d9bd6251c57c56c7bd7646 AS build
 
 #Metadata about this image
 LABEL maintainer="Ahmed Tazwar <atazwar@myseneca.ca>"
 LABEL description="Fragments node.js microservice"
+
+ENV NODE_ENV=production
 
 # We default to use port 8080 in our service
 ENV PORT=8080
@@ -26,6 +28,14 @@ COPY package*.json ./
 
 # Install node dependencies defined in package-lock.json
 RUN npm install
+
+####################################################################################
+#
+FROM node:18.13.0-bullseye-slim@sha256:bc946484118735406562f17c57ddf5fded436e175b6a51f827aa6540ba1e13de AS deploy
+
+WORKDIR /app
+
+COPY --from=build /app /app
 
 # Copy src to /app/src/
 COPY ./src ./src
