@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   try {
     const fragmentData = req.body;
 
-    var fragObj = new frag.Fragment({ ownerId: req.user, type: req.headers['content-type'] });
+    let fragObj = new frag.Fragment({ ownerId: req.user, type: req.headers['content-type'] });
 
     fragObj.save();
     await fragObj.setData(fragmentData);

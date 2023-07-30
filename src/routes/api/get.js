@@ -21,8 +21,9 @@ module.exports.get = (req, res) => {
   }
 };
 
-module.exports.getOne = (req, res) => {
-  var fragObj = new frag.Fragment({ id: req.params.id, ownerId: req.user, type: 'text/plain' });
+module.exports.getOne = async (req, res) => {
+  var fragObj = await frag.Fragment.byId(req.user, req.params.id);
+
   fragObj
     .getData()
     .then((data) => {
@@ -32,6 +33,20 @@ module.exports.getOne = (req, res) => {
         res.setHeader('Content-Type', 'text/plain');
         logger.debug({ buffObject }, 'Got fragments data from V1/fragments/:id');
         res.status(200).send(buffObject);
+      } else {
+        throw new Error('Object not found');
+      }
+    })
+    .catch((error) => {
+      res.status(404).json(createErrorResponse(404, error.message));
+    });
+};
+
+module.exports.getOneWithInfo = (req, res) => {
+  frag.Fragment.byId(req.user, req.params.id)
+    .then((data) => {
+      if (data) {
+        res.status(200).send(createSuccessResponse({ fragment: data }));
       } else {
         throw new Error('Object not found');
       }

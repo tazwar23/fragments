@@ -56,11 +56,7 @@ class Fragment {
    * @returns Promise<Fragment>
    */
   static async byId(ownerId, id) {
-    const result = await readFragment(ownerId, id);
-    if (!result) {
-      throw new Error('No record can be found for given id');
-    }
-    return result;
+    return readFragment(ownerId, id);
   }
 
   /**

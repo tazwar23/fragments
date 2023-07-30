@@ -6,13 +6,14 @@
 const express = require('express');
 var contentType = require('content-type');
 var { Fragment } = require('../../model/fragment');
-const { get, getOne } = require('./get');
+const { get, getOne, getOneWithInfo } = require('./get');
 // Create a router on which to mount our API endpoints
 const router = express.Router();
 
 // Define our first route, which will be: GET /v1/fragments
 router.get('/fragments', get);
 router.get('/fragments/:id', getOne);
+router.get('/fragments/:id/info', getOneWithInfo);
 
 // Support sending various Content-Types on the body up to 5M in size
 const rawBody = () =>
