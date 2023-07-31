@@ -60,7 +60,7 @@ class Fragment {
     if (!result) {
       throw new Error('No record can be found for given id');
     }
-    return Promise.resolve(result);
+    return result;
   }
 
   /**
