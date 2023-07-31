@@ -25,12 +25,15 @@ module.exports.getOne = async (req, res) => {
   //Getting fragment object through the user and the request parameter
   frag.Fragment.byId(req.user, req.params.id)
     //Using fragment.getData() to get the buffer object which holds the data
-    .then((fragObj) => fragObj.getData())
+    .then((fragObj) => {
+      res.type(fragObj.mimeType);
+      return fragObj.getData();
+    })
     .then((data) => {
       if (data) {
         var buffObject = Buffer.from(data);
         buffObject = buffObject.toString();
-        res.setHeader('Content-Type', 'text/plain');
+
         logger.debug({ buffObject }, 'Got fragments data from V1/fragments/:id');
         res.status(200).send(buffObject);
       } else {
