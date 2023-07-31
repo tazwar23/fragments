@@ -130,7 +130,7 @@ class Fragment {
    */
   get formats() {
     if (this.isText) {
-      return ['text/plain'];
+      return ['text/plain', 'text/*', 'application/json'];
     }
     return [];
   }
