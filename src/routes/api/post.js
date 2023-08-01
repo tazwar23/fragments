@@ -4,7 +4,13 @@ const logger = require('../../logger');
 
 module.exports = async (req, res) => {
   // // Assuming the request body contains necessary data for creating a fragment
+  if (!Buffer.isBuffer(req.body)) {
+    res.status(415).json(createErrorResponse(415, 'Unsupported Media Type'));
+    return;
+  }
+
   try {
+    logger.info('Creating fragment via post route');
     const fragmentData = req.body;
 
     let fragObj = new frag.Fragment({ ownerId: req.user, type: req.headers['content-type'] });
