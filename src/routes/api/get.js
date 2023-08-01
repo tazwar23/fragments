@@ -5,6 +5,7 @@
  */
 const frag = require('../../model/fragment');
 const logger = require('../../logger');
+var md = require('markdown-it')();
 
 const { createSuccessResponse, createErrorResponse } = require('../../response');
 module.exports.get = (req, res) => {
@@ -22,19 +23,27 @@ module.exports.get = (req, res) => {
 };
 
 module.exports.getOne = async (req, res) => {
+  //Splitting the parameter in two to seperate the extension
+  const paramParts = req.params.id.split('.');
+
   //Getting fragment object through the user and the request parameter
-  frag.Fragment.byId(req.user, req.params.id)
-    //Using fragment.getData() to get the buffer object which holds the data
+  frag.Fragment.byId(req.user, paramParts[0])
     .then((fragObj) => {
       res.type(fragObj.mimeType);
       return fragObj.getData();
     })
     .then((data) => {
       if (data) {
-        var buffObject = Buffer.from(data);
+        //Checking if the extension required is .html
+        if (paramParts[1] === 'html') {
+          //using mark-it-down
+          data = md.render(data.toString('utf-8'));
+          //converting it to buffer
+          data = Buffer.from(data, 'utf-8');
+        }
 
-        logger.debug({ buffObject }, 'Got fragments data from V1/fragments/:id');
-        res.status(200).send(buffObject);
+        logger.debug({ data }, 'Got fragments data from V1/fragments/:id');
+        res.status(200).send(data);
       } else {
         throw new Error('Object not found');
       }
