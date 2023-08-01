@@ -29,8 +29,8 @@ router.get('/', (req, res) => {
   res.setHeader('Cache-Control', 'no-cache');
   res.status(200).json(
     createSuccessResponse({
-      author: 'Your Name',
-      githubUrl: 'https://github.com/your-github-account-username/fragments',
+      author: author,
+      githubUrl: 'https://github.com/tazwar23/fragments',
       version,
       // Include the hostname in the response
       hostname: hostname(),
