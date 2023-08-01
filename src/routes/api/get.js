@@ -32,7 +32,6 @@ module.exports.getOne = async (req, res) => {
     .then((data) => {
       if (data) {
         var buffObject = Buffer.from(data);
-        buffObject = buffObject.toString();
 
         logger.debug({ buffObject }, 'Got fragments data from V1/fragments/:id');
         res.status(200).send(buffObject);
