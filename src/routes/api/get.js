@@ -57,12 +57,7 @@ module.exports.getOneWithInfo = async (req, res) => {
   //Getting fragment object through the user and the request parameter
   frag.Fragment.byId(req.user, req.params.id)
     .then((fragObject) => {
-      //If the fragment object is valid
-      if (fragObject) {
-        return res.status(200).send(createSuccessResponse({ fragment: fragObject }));
-      } else {
-        throw new Error('Object not found');
-      }
+      return res.status(200).send(createSuccessResponse({ fragment: fragObject }));
     })
     .catch((error) => {
       return res.status(404).json(createErrorResponse(404, error.message));
