@@ -15,10 +15,10 @@ module.exports.get = (req, res) => {
     frag.Fragment.byUser(req.user, expand).then((data) => {
       var resData = { fragments: data };
       logger.debug({ resData }, 'Got fragments from V1/fragments/');
-      res.status(200).json(createSuccessResponse(resData));
+      return res.status(200).json(createSuccessResponse(resData));
     });
   } catch (msg) {
-    res.status(400).json(createErrorResponse(msg.message));
+    return res.status(400).json(createErrorResponse(msg.message));
   }
 };
 
@@ -43,13 +43,13 @@ module.exports.getOne = async (req, res) => {
         }
 
         logger.debug({ data }, 'Got fragments data from V1/fragments/:id');
-        res.status(200).send(data);
+        return res.status(200).send(data);
       } else {
         throw new Error('Object not found');
       }
     })
     .catch((error) => {
-      res.status(404).json(createErrorResponse(404, error.message));
+      return res.status(404).json(createErrorResponse(404, error.message));
     });
 };
 
@@ -59,12 +59,12 @@ module.exports.getOneWithInfo = async (req, res) => {
     .then((fragObject) => {
       //If the fragment object is valid
       if (fragObject) {
-        res.status(200).send(createSuccessResponse({ fragment: fragObject }));
+        return res.status(200).send(createSuccessResponse({ fragment: fragObject }));
       } else {
         throw new Error('Object not found');
       }
     })
     .catch((error) => {
-      res.status(404).json(createErrorResponse(404, error.message));
+      return res.status(404).json(createErrorResponse(404, error.message));
     });
 };

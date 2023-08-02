@@ -3,13 +3,12 @@ const { createSuccessResponse, createErrorResponse } = require('../../response')
 const logger = require('../../logger');
 
 module.exports = async (req, res) => {
-  // // Assuming the request body contains necessary data for creating a fragment
-  if (!Buffer.isBuffer(req.body)) {
-    res.status(415).json(createErrorResponse(415, 'Unsupported Media Type'));
-    return;
-  }
-
   try {
+    // // Assuming the request body contains necessary data for creating a fragment
+    if (!Buffer.isBuffer(req.body)) {
+      return res.status(415).json(createErrorResponse(415, 'Unsupported Media Type'));
+    }
+
     logger.info('Creating fragment via post route');
     const fragmentData = req.body;
 
@@ -24,8 +23,8 @@ module.exports = async (req, res) => {
     res.setHeader('Location', fragmentURL);
     var fragment = { fragment: fragObj };
     logger.debug({ fragment }, 'Fragment created with post route');
-    res.status(201).json(createSuccessResponse(fragment));
+    return res.status(201).json(createSuccessResponse(fragment));
   } catch (msg) {
-    res.status(500).json(createErrorResponse(404, msg.message));
+    return res.status(500).json(createErrorResponse(500, msg.message));
   }
 };
