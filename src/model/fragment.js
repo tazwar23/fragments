@@ -106,7 +106,7 @@ class Fragment {
   }
 
   /**
-   * Returns the mime type (e.g., without encoding) for the fragment's type:
+   * Returns the mime type (e.g.,  without encoding) for the fragment's type:
    * "text/html; charset=utf-8" -> "text/html"
    * @returns {string} fragment's mime type (without encoding)
    */
