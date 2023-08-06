@@ -35,7 +35,7 @@ FROM node:18.13.0-bullseye-slim@sha256:bc946484118735406562f17c57ddf5fded436e175
 
 WORKDIR /app
 
-#Copying the modules created in the from the build image /app directory to this image's app directory
+#Copying the modules created in the from the build image's /app directory to this image's app directory
 COPY --from=build /app /app
 
 # Copy src to /app/src/
