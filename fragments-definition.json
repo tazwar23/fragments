@@ -17,7 +17,7 @@
       "entryPoint": [],
       "portMappings": [
         {
-          "hostPort": 8080,
+          "hostPort": ${{ secrets.PORT }},
           "protocol": "tcp",
           "containerPort": 8080
         }
