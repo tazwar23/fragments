@@ -5,7 +5,7 @@ const { PutObjectCommand, GetObjectCommand, DeleteObjectCommand } = require('@aw
 const logger = require('../../../logger');
 
 // Create two in-memory databases: one for fragment metadata and the other for raw data
-const data = new MemoryDB();
+//const data = new MemoryDB();
 const metadata = new MemoryDB();
 
 // Write a fragment's metadata to memory db. Returns a Promise
@@ -111,7 +111,7 @@ async function deleteFragment(ownerId, id) {
   };
   const command = new DeleteObjectCommand(params);
   try {
-    const response = await client.send(command);
+    await s3Client.send(command);
   } catch (err) {
     const { Bucket, Key } = params;
     logger.error({ err, Bucket, Key }, 'Error deleting from S3');
