@@ -17,7 +17,7 @@
       "entryPoint": [],
       "portMappings": [
         {
-          "hostPort": ${{ secrets.PORT }},
+          "hostPort": 8080,
           "protocol": "tcp",
           "containerPort": 8080
         }
@@ -25,20 +25,7 @@
       "command": [],
       "linuxParameters": null,
       "cpu": 256,
-      "environment": [
-        {
-          "name": "AWS_COGNITO_CLIENT_ID",
-          "value": "2ilqiogkdbvkqrqfuvo2g8o2cq"
-        },
-        {
-          "name": "AWS_COGNITO_POOL_ID",
-          "value": "us-east-1_Gx30vrk1O"
-        },
-        {
-          "name": "PORT",
-          "value": "8080"
-        }
-      ],
+      "environment": [],
       "resourceRequirements": null,
       "ulimits": null,
       "dnsServers": null,
@@ -50,7 +37,7 @@
       "memoryReservation": 512,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "tazwar074/fragments:latest",
+      "image": null,
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -73,10 +60,7 @@
   "placementConstraints": [],
   "memory": "512",
   "taskRoleArn": null,
-  "compatibilities": [
-    "EC2",
-    "FARGATE"
-  ],
+  "compatibilities": ["EC2", "FARGATE"],
   "taskDefinitionArn": "arn:aws:ecs:us-east-1:919801558584:task-definition/fragments-task:1",
   "family": "fragments-task",
   "requiresAttributes": [
@@ -118,9 +102,7 @@
     }
   ],
   "pidMode": null,
-  "requiresCompatibilities": [
-    "FARGATE"
-  ],
+  "requiresCompatibilities": ["FARGATE"],
   "networkMode": "awsvpc",
   "runtimePlatform": null,
   "cpu": "256",
