@@ -7,16 +7,17 @@ const logger = require('../../../logger');
 const { PutCommand, GetCommand, QueryCommand, DeleteCommand } = require('@aws-sdk/lib-dynamodb');
 
 // Writes a fragment to DynamoDB. Returns a Promise.
-function writeFragment(fragment) {
+async function writeFragment(fragment) {
   // Configure our PUT params, with the name of the table and item (attributes and keys)
+
   const params = {
     TableName: process.env.AWS_DYNAMODB_TABLE_NAME,
     Item: fragment,
   };
-
+  logger.info({ fragment }, 'Trying put command');
   // Create a PUT command to send to DynamoDB
   const command = new PutCommand(params);
-
+  logger.info('got put command');
   try {
     return ddbDocClient.send(command);
   } catch (err) {
