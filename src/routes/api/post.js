@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     let fragObj = new frag.Fragment({ ownerId: req.user, type: req.headers['content-type'] });
 
     await fragObj.setData(fragmentData);
-    fragObj.save();
+    await fragObj.save();
 
     const fragmentURL = `http://${req.headers.host}/v1/fragments/${fragObj.id}`;
 

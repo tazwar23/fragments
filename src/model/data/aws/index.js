@@ -1,5 +1,4 @@
 // XXX: temporary use of memory-db until we add DynamoDB
-const MemoryDB = require('../memory/memory-db');
 const s3Client = require('./s3Client');
 const ddbDocClient = require('./ddbDocClient');
 const { PutObjectCommand, GetObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3');
@@ -134,7 +133,6 @@ async function listFragments(ownerId, expand = false) {
       ':ownerId': ownerId,
     },
   };
-
   // Limit to only `id` if we aren't supposed to expand. Without doing this
   // we'll get back every attribute.  The projection expression defines a list
   // of attributes to return, see:

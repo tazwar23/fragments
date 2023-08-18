@@ -32,3 +32,12 @@ HTTP/1.1 200
 Content-Type: application/json; charset=utf-8
 [Asserts]
 jsonpath "$.content" == "This is a fragment!"
+
+# 3. DELETE the fragment using the captured URL
+DELETE {{url}}
+[BasicAuth]
+user1@email.com:password1
+
+HTTP/1.1 200
+[Asserts]
+jsonpath "$.status" == "ok"

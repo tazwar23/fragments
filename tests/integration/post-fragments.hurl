@@ -41,3 +41,13 @@ Content-Type: text/plain; charset=utf-8
 Content-Length: 19
 [Asserts]
 body == "This is a fragment!"
+
+# 3. DELETE the fragment using the captured URL
+DELETE {{url}}
+[BasicAuth]
+user1@email.com:password1
+
+HTTP/1.1 200
+[Asserts]
+# Assuming that your API returns a success status for the DELETE action
+jsonpath "$.status" == "ok"

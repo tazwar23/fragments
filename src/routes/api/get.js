@@ -28,9 +28,10 @@ module.exports.getOne = async (req, res) => {
 
   //Getting fragment object through the user and the request parameter
   frag.Fragment.byId(req.user, paramParts[0])
-    .then((fragObj) => {
+    .then(async (fragObj) => {
+      fragObj = new frag.Fragment(fragObj);
       res.type(fragObj.mimeType);
-      return fragObj.getData();
+      return await fragObj.getData();
     })
     .then((data) => {
       if (data) {
