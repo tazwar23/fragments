@@ -1,14 +1,11 @@
 // XXX: temporary use of memory-db until we add DynamoDB
 const MemoryDB = require('../memory/memory-db');
 const s3Client = require('./s3Client');
+const ddbDocClient = require('./ddbDocClient');
 const { PutObjectCommand, GetObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3');
 const logger = require('../../../logger');
 
-const ddbDocClient = require('./ddbDocClient');
 const { PutCommand, GetCommand, QueryCommand, DeleteCommand } = require('@aws-sdk/lib-dynamodb');
-// Create two in-memory databases: one for fragment metadata and the other for raw data
-//const data = new MemoryDB();
-const metadata = new MemoryDB();
 
 // Writes a fragment to DynamoDB. Returns a Promise.
 function writeFragment(fragment) {
@@ -184,8 +181,8 @@ async function deleteFragment(ownerId, id) {
     TableName: process.env.AWS_DYNAMODB_TABLE_NAME,
     Key: { ownerId, id },
   };
-  // Create a PUT command to send to DynamoDB
-  const comman = new PutCommand(param);
+  // Create a Delete command to send to DynamoDB
+  const comman = new DeleteCommand(param);
 
   try {
     return ddbDocClient.send(comman);
