@@ -14,11 +14,10 @@ async function writeFragment(fragment) {
     TableName: process.env.AWS_DYNAMODB_TABLE_NAME,
     Item: fragment,
   };
-  logger.info({ fragment }, 'Trying put command');
   // Create a PUT command to send to DynamoDB
   const command = new PutCommand(params);
-  logger.info('got put command');
   try {
+    logger.info({ command }, 'Calling the command');
     return ddbDocClient.send(command);
   } catch (err) {
     logger.warn({ err, params, fragment }, 'error writing fragment to DynamoDB');
