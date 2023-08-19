@@ -149,8 +149,18 @@ class Fragment {
       'image/png',
       'image/jpeg',
       'image/webp',
+      'image/gif',
     ];
     return supportedTypes.includes(value);
+  }
+  async convert(data, ext) {
+    if (!data) {
+      throw new Error('Buffer not given');
+    } else {
+      this.updated = new Date().toISOString();
+    }
+    this.size = data.length;
+    return writeFragmentData(this.ownerId, this.id, data);
   }
 }
 
