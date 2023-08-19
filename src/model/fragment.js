@@ -3,7 +3,8 @@
 const { randomUUID } = require('crypto');
 // Use https://www.npmjs.com/package/content-type to create/parse Content-Type headers
 const contentType = require('content-type');
-
+var md = require('markdown-it')();
+const sharp = require('sharp');
 // Functions for working with fragment metadata/data using our DB
 const {
   readFragment,
@@ -154,13 +155,23 @@ class Fragment {
     return supportedTypes.includes(value);
   }
   async convert(data, ext) {
-    if (!data) {
-      throw new Error('Buffer not given');
-    } else {
-      this.updated = new Date().toISOString();
+    if (ext === 'txt' && (this.isText || this.mimeType === 'application/json')) {
+      return data;
+    } else if (
+      ext === 'html' &&
+      (this.mimeType === 'text/markdown' || this.mimeType === 'text/html')
+    ) {
+      //using mark-it-down
+      data = md.render(data.toString('utf-8'));
+      //converting it to buffer
+      data = Buffer.from(data, 'utf-8');
+    } else if (ext === 'json' && this.mimeType === 'application/json') {
+      return data;
+    } else if (['png', 'jpg', 'webp', 'gif'].includes(ext) && this.mimeType.startsWith('image/')) {
+      const outputBuffer = await sharp(data).toFormat(ext).toBuffer();
+      return outputBuffer;
     }
-    this.size = data.length;
-    return writeFragmentData(this.ownerId, this.id, data);
+    throw new Error('Invalid conversion type.');
   }
 }
 

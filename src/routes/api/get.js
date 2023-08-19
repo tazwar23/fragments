@@ -5,7 +5,6 @@
  */
 const frag = require('../../model/fragment');
 const logger = require('../../logger');
-var md = require('markdown-it')();
 
 const { createSuccessResponse, createErrorResponse } = require('../../response');
 module.exports.get = (req, res) => {
@@ -33,12 +32,9 @@ module.exports.getOne = async (req, res) => {
       res.type(fragObj.mimeType);
       let data = await fragObj.getData();
 
-      //Checking if the extension required is .html
-      if (paramParts[1] === 'html') {
-        //using mark-it-down
-        data = md.render(data.toString('utf-8'));
-        //converting it to buffer
-        data = Buffer.from(data, 'utf-8');
+      //Checking if the extension is required
+      if (paramParts.length > 1) {
+        data = fragObj.convert(data, paramParts[1]);
       }
 
       logger.debug({ data }, 'Got fragments data from V1/fragments/:id');
