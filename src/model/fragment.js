@@ -155,24 +155,26 @@ class Fragment {
     return supportedTypes.includes(value);
   }
   async convert(data, ext) {
-    if (ext === 'txt' && (this.isText || this.mimeType === 'application/json')) {
-      return data;
+    let newMimeType;
+
+    if (ext === 'txt' && (this.isText || this.mimeType.includes('application/json'))) {
+      newMimeType = 'text/plain';
     } else if (
       ext === 'html' &&
-      (this.mimeType === 'text/markdown' || this.mimeType === 'text/html')
+      (this.mimeType.includes('text/markdown') || this.mimeType.includes('text/html'))
     ) {
-      //using mark-it-down
       data = md.render(data.toString('utf-8'));
-      //converting it to buffer
       data = Buffer.from(data, 'utf-8');
-      return data;
-    } else if (ext === 'json' && this.mimeType === 'application/json') {
-      return data;
+      newMimeType = 'text/html';
+    } else if (ext === 'json' && this.mimeType.includes('application/json')) {
+      newMimeType = 'application/json';
     } else if (['png', 'jpg', 'webp', 'gif'].includes(ext) && this.mimeType.startsWith('image/')) {
       const outputBuffer = await sharp(data).toFormat(ext).toBuffer();
-      return outputBuffer;
+      newMimeType = ext === 'jpg' ? `image/jpeg` : `image/${ext}`;
+    } else {
+      throw new Error('Invalid conversion type.');
     }
-    throw new Error('Invalid conversion type.');
+    return { data, mimeType: newMimeType };
   }
 }
 

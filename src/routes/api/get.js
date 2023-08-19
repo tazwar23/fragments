@@ -29,14 +29,17 @@ module.exports.getOne = async (req, res) => {
   frag.Fragment.byId(req.user, paramParts[0])
     .then(async (fragObj) => {
       fragObj = new frag.Fragment(fragObj);
-      res.type(fragObj.mimeType);
+
       let data = await fragObj.getData();
+      let mimeType = fragObj.mimeType;
 
       //Checking if the extension is required
       if (paramParts.length > 1) {
-        data = await fragObj.convert(data, paramParts[1]);
+        const conversionResult = await fragObj.convert(data, paramParts[1]);
+        data = conversionResult.data;
+        mimeType = conversionResult.mimeType;
       }
-
+      res.type(mimeType);
       logger.debug({ data }, 'Got fragments data from V1/fragments/:id');
       return res.status(200).send(data);
     })
