@@ -31,23 +31,18 @@ module.exports.getOne = async (req, res) => {
     .then(async (fragObj) => {
       fragObj = new frag.Fragment(fragObj);
       res.type(fragObj.mimeType);
-      return await fragObj.getData();
-    })
-    .then((data) => {
-      if (data) {
-        //Checking if the extension required is .html
-        if (paramParts[1] === 'html') {
-          //using mark-it-down
-          data = md.render(data.toString('utf-8'));
-          //converting it to buffer
-          data = Buffer.from(data, 'utf-8');
-        }
+      let data = await fragObj.getData();
 
-        logger.debug({ data }, 'Got fragments data from V1/fragments/:id');
-        return res.status(200).send(data);
-      } else {
-        throw new Error('Object not found');
+      //Checking if the extension required is .html
+      if (paramParts[1] === 'html') {
+        //using mark-it-down
+        data = md.render(data.toString('utf-8'));
+        //converting it to buffer
+        data = Buffer.from(data, 'utf-8');
       }
+
+      logger.debug({ data }, 'Got fragments data from V1/fragments/:id');
+      return res.status(200).send(data);
     })
     .catch((error) => {
       return res.status(404).json(createErrorResponse(404, error.message));
