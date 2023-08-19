@@ -34,7 +34,7 @@ module.exports.getOne = async (req, res) => {
 
       //Checking if the extension is required
       if (paramParts.length > 1) {
-        data = fragObj.convert(data, paramParts[1]);
+        data = await fragObj.convert(data, paramParts[1]);
       }
 
       logger.debug({ data }, 'Got fragments data from V1/fragments/:id');

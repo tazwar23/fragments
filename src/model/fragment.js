@@ -165,6 +165,7 @@ class Fragment {
       data = md.render(data.toString('utf-8'));
       //converting it to buffer
       data = Buffer.from(data, 'utf-8');
+      return data;
     } else if (ext === 'json' && this.mimeType === 'application/json') {
       return data;
     } else if (['png', 'jpg', 'webp', 'gif'].includes(ext) && this.mimeType.startsWith('image/')) {
