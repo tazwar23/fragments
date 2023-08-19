@@ -132,7 +132,6 @@ class Fragment {
     if (this.isText) {
       return ['text/plain', 'text/*', 'application/json'];
     }
-    return [];
   }
 
   /**
@@ -141,17 +140,17 @@ class Fragment {
    * @returns {boolean} true if we support this Content-Type (i.e., type/subtype)
    */
   static isSupportedType(value) {
-    if (
-      value !== 'text/plain' &&
-      value !== 'text/plain; charset=utf-8' &&
-      value !== 'text/markdown' &&
-      value !== 'text/html' &&
-      value !== 'application/json'
-    ) {
-      return false;
-    }
-
-    return true;
+    const supportedTypes = [
+      'text/plain',
+      'text/plain; charset=utf-8',
+      'text/markdown',
+      'text/html',
+      'application/json',
+      'image/png',
+      'image/jpeg',
+      'image/webp',
+    ];
+    return supportedTypes.includes(value);
   }
 }
 
