@@ -17,7 +17,6 @@ async function writeFragment(fragment) {
   // Create a PUT command to send to DynamoDB
   const command = new PutCommand(params);
   try {
-    logger.info({ command }, 'Calling the command');
     return ddbDocClient.send(command);
   } catch (err) {
     logger.warn({ err, params, fragment }, 'error writing fragment to DynamoDB');

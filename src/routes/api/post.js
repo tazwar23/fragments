@@ -12,7 +12,11 @@ module.exports = async (req, res) => {
     logger.info('Creating fragment via post route');
     const fragmentData = req.body;
 
-    let fragObj = new frag.Fragment({ ownerId: req.user, type: req.headers['content-type'] });
+    let fragObj = new frag.Fragment({
+      ownerId: req.user,
+      type: req.headers['content-type'],
+      size: fragmentData.length,
+    });
 
     await fragObj.setData(fragmentData);
     await fragObj.save();

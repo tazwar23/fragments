@@ -3,7 +3,7 @@
 const { randomUUID } = require('crypto');
 // Use https://www.npmjs.com/package/content-type to create/parse Content-Type headers
 const contentType = require('content-type');
-const logger = require('../../src/logger');
+
 // Functions for working with fragment metadata/data using our DB
 const {
   readFragment,
@@ -77,11 +77,9 @@ class Fragment {
    * Saves the current fragment to the database
    * @returns Promise<void>
    */
-  async save() {
+  save() {
     this.updated = new Date().toISOString();
-    await writeFragment(this);
-    logger.info('Save was returned');
-    return Promise.resolve();
+    return writeFragment(this);
   }
 
   /**
