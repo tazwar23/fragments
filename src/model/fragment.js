@@ -169,7 +169,7 @@ class Fragment {
     } else if (ext === 'json' && this.mimeType.includes('application/json')) {
       newMimeType = 'application/json';
     } else if (['png', 'jpg', 'webp', 'gif'].includes(ext) && this.mimeType.startsWith('image/')) {
-      const outputBuffer = await sharp(data).toFormat(ext).toBuffer();
+      data = await sharp(data).toFormat(ext).toBuffer();
       newMimeType = ext === 'jpg' ? `image/jpeg` : `image/${ext}`;
     } else {
       throw new Error('Invalid conversion type.');
